@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="js/sub.js"></script>
+<script>
+    function print(x) {
+        console.log(x);
+    }
+
+    (function () {
+        print("------- TEST 1 --------");
+        var Shape = {
+            name : "base",
+            width : 0,
+            height : 0,
+            getWidth : function () {
+                return this.width;
+            },
+            setWidth : function (width) {
+                this.width = width;
+            }
+        };
+
+        Shape.setWidth(10);
+        print(Shape.getWidth());
+
+    }());
+
+    (function () {
+        print("------- TEST 2 --------");
+        function Room() {
+            var room= {};
+        }
+
+        var room = new Room();
+        print(room);
+
+        //
+        // var room2 = new Room();
+        // print(room2);
+        // // print(typeof room2);
+        // // print(room2.__proto__);
+        // print(Object.getPrototypeOf(room2));
+
+    }());
+
+    (function () {
+        print("------- TEST 3 --------");
+        function Room() {
+            var room= {};
+            print("here is funciton Room()");
+            return {
+                getMessageList: function () {
+                    return room.messages;
+                },
+                getRoomName: function () {
+                    return room.roomName;
+                }
+            };
+        }
+
+        // var room = Room();
+        // print(room);
+        // print(typeof room);
+        // print(Object.getPrototypeOf(room));
+
+
+        var room2 = new Room();
+        print(room2);
+        // print(typeof room2);
+        print(Object.getPrototypeOf(room2));
+
+    }());
+
+    (function () {
+        print("------- TEST 4 --------");
+        var serial_maker = function (  ) {
+            var prefix = '';
+            var seq = 0;
+            return {
+                set_prefix: function (p) {
+                    prefix = String(p);
+                },
+                set_seq: function (s) {
+                    seq = s;
+                },
+                gensym: function ( ) {
+                    var result = prefix + seq;
+                    seq += 1;
+                    return result;
+                }
+            };
+        };
+
+        var seqer = serial_maker( );
+        seqer.set_prefix('Q');
+        seqer.set_seq(1000);
+        var unique = seqer.gensym( );
+
+        print(seqer);
+    }());
+
+    (function () {
+        print("------- TEST 5 --------");
+        function serial_maker(  ) {
+            var prefix = '';
+            var seq = 0;
+            return {
+                set_prefix: function (p) {
+                    prefix = String(p);
+                },
+                set_seq: function (s) {
+                    seq = s;
+                },
+                gensym: function ( ) {
+                    var result = prefix + seq;
+                    seq += 1;
+                    return result;
+                }
+            };
+        };
+
+        var seqer = serial_maker( );
+        seqer.set_prefix('Q');
+        seqer.set_seq(1000);
+        var unique = seqer.gensym( );
+
+        print(seqer);
+    }());
+
+    (function () {
+        print("------- TEST 6 --------");
+        function Graph() {
+            this.vertices = [];
+            this.edges = [];
+        }
+
+        Graph.prototype = {
+            addVertex: function(v) {
+                this.vertices.push(v);
+            }
+        };
+
+        var g = new Graph();
+
+        print(g);
+    }());
+
+    (function () {
+        print("------- TEST 7 --------");
+        function Graph() {
+            this.vertices = [];
+            this.edges = [];
+        }
+
+        Graph.prototype = {
+            addVertex: function(v) {
+                this.vertices.push(v);
+            }
+        };
+
+        var g = new Graph();
+
+        print(Graph.prototype);
+
+        var g2 = Object.create(g);
+        print(g2);
+
+    }());
+
+
+    (function () {
+        print("------- TEST 7 --------");
+        var Graph = function () {
+            this.vertices = [];
+            this.edges = [];
+        }
+
+        print("Graph.prototype before setting")
+        print(Graph.prototype);
+
+        Graph.prototype = {
+            addVertex: function(v) {
+                this.vertices.push(v);
+            }
+        };
+
+        print("Graph.prototype after setting")
+        print(Graph.prototype);
+
+        var g = new Graph();
+
+
+        var g2 = Object.create(g);
+        print(g2);
+
+    }());
+
+    (function () {
+        print("------- TEST 8 --------");
+        var Mammal = function (name) {
+            this.name = name;
+        };
+
+        Mammal.prototype.get_name = function (  ) {
+            return this.name;
+        };
+
+        Mammal.prototype.says = function (  ) {
+            return this.saying || '';
+        };
+        print(Mammal.prototype);
+        // print(Cat.prototype);
+
+        var Mam= new Mammal("cat");
+        print(Mam);
+    }());
+
+    (function () {
+        print("------- TEST 9 --------");
+        var Mammal = function (name) {
+            this.name = name;
+        };
+
+        Mammal.prototype.get_name = function (  ) {
+            return this.name;
+        };
+
+        Mammal.prototype.says = function (  ) {
+            return this.saying || '';
+        };
+        print(Mammal.prototype);
+        // print(Cat.prototype);
+
+        var Mam= new Mammal("cat");
+        print(Mam);
+
+        var Cat = function (name) {
+            this.name = name;
+            this.saying = 'meow';
+        };
+
+        Cat.prototype = new Mammal(  );
+
+        Cat.prototype.purr = function (n) {
+            var i, s = '';
+            for (i = 0; i < n; i += 1) {
+                if (s) {
+                    s += '-';
+                }
+                s += 'r';
+            }
+            return s;
+        };
+        Cat.prototype.get_name = function (  ) {
+            return this.says(  ) + ' ' + this.name + ' ' + this.says(  );
+        };
+
+        var myCat = new Cat('Henrietta');
+        var says = myCat.says(  );
+        var purr = myCat.purr(5);
+        var name = myCat.get_name(  );
+
+
+        print(myCat);
+
+    }());
+
+</script>
+</body>
+</html>

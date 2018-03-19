@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function print(x) {
+        console.log(x);
+    }
+
+    function vchange(x) {
+        x = "after";
+    }
+
+    (function () {
+       var str = "after";2
+
+       vchange(str);
+
+       print(str);
+    }());
+
+    (function () {
+       var Mammal = {};//name : "mango"};
+
+       var doc = Object.create(Mammal);
+
+       Mammal.name= "mongmong";
+
+       print(doc.name);
+
+       print(doc);
+    }());
+
+    (function () {
+        print("--------test3------");
+        var Mammal = function () {
+            this.name = "Mango";
+        };
+        print(typeof Mammal);
+        print(Mammal.prototype);
+
+        var Mal = new Mammal();
+        print(Mal.prototype);   //undefined
+
+        var doc = Object.create(Mal);
+
+        Mammal.name= "mongmong";
+
+        print(doc.name);
+
+        print(doc);
+        print(" --> doc.__proto__");
+        print(doc.__proto__);
+        print(" --> Object.getPrototypeOf(doc)");
+        print(Object.getPrototypeOf(doc));
+
+        Object.getPrototypeOf(doc).cry = function (x) {
+            print("this is cry : " + x);
+        };
+
+        doc.cry("meow meow");
+
+
+        var test = Object.create(Mammal);
+        print(test);
+        print(test.prototype);
+
+        // print(String.prototype);
+        // print(Number.prototype);
+        // print(Boolean.prototype);
+        // print(Function.prototype);
+        // print(Array.prototype);
+        // print(Object.prototype);
+        // print(Error.prototype);
+        // print(RegExp.prototype);
+        // print(Date.prototype);
+        //
+        // print(typeof String.prototype);
+        // print(typeof Number.prototype);
+        // print(typeof Boolean.prototype);
+        // print(typeof Function.prototype);
+        // print(typeof Array.prototype);
+        // print(typeof Object.prototype);
+
+    }());
+
+    (function () {
+        print("--------test4------");
+        var Quo = function (string) {
+            this.status = string;
+        };
+
+        print(Quo.prototype);
+
+        var Quo2 = function (string) {
+            status = string;
+        };
+
+        print(Quo2.prototype);
+        // var Obj = {a : 10};
+        // print(Obj.prototype);
+    }());
+
+    (function () {
+        print("--------test5------");
+        function Graph() {
+            this.vertices = [];
+            this.edges = [];
+        }
+
+        Graph.prototype = {
+            addVertex: function(v) {
+                this.vertices.push(v);
+            }
+        };
+
+        var g = new Graph();
+
+        print(g);
+        print(Object.getPrototypeOf(g));
+    }());
+
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function print(x) {
+        console.log(x);
+    }
+
+    (function () {
+        var [a, b] = [1,2];
+        print(a + ", " + b);
+
+    }());
+
+    (function () {
+        function f(x, ...y) {
+            return [x, ...y];
+        };
+
+        print(f(3, "abc", 3));
+
+        print(Math.max(4, 8, 2));
+        print(Math.max(...[4, 8, 2]));
+    }());
+
+    (function () {
+        let squares = [1,2,3].map( function (x) {return x*x;});
+
+        print(squares);
+    }());
+
+    (function () {
+        let squares = [1,5,3].map( x => x*x);
+
+        print(squares);
+    }());
+
+    (function () {
+        var a = 1;
+        {
+            let b  = 10;
+        }
+
+        print(a);
+        // b && print(b); //exception
+    }());
+
+
+    (function () {
+
+        var a = [1, 2, 3];
+        for( let i in a){
+            print(i);
+        }
+
+        // print(i);  //exception
+    }());
+
+    (function () {
+        let numbers = [10,20,30];
+        for( let x of numbers)
+            print(x);
+
+        // let squars = [ x * x for (x of numbers)];
+
+        // print(squars);
+
+    }());
+
+    (function () {
+        print("---- test 6 ----");
+
+        var a = {
+            i:100,
+            printWithDelay : function () {
+                var self = this;
+                setTimeout( function () {
+                    print(self.i);
+                }, 100);
+            }
+        };
+
+        a.printWithDelay();
+    }());
+
+    (function () {
+        print("---- test 7 ----");
+
+        var a = {
+            i:100,
+            printWithDelay : function () {
+                setTimeout( function () {
+                    print(this.i);
+                }.bind(this), 100);
+            }
+        };
+
+        a.printWithDelay();
+    }());
+
+
+    (function () {
+        print("---- test 8 ----");
+
+        var a = {
+            i:200,
+            printWithDelay : function () {
+                setTimeout( () => print(this.i), 100);
+            }
+        };
+
+        a.printWithDelay();
+    }());
+
+    (function () {
+        print("---- test 9 ----");
+
+        var a = 10;
+
+        var i = a => a + a;
+
+        print(i(10));
+
+    }());
+
+    (function () {
+        print("---- test 10 ----");
+
+        var a = 'outer';
+        function bar() {
+            var a;
+            print(a);
+
+            a = 'inner';
+        }
+
+        bar();
+        print(a);
+
+    }());
+
+</script>
+</body>
+</html>
