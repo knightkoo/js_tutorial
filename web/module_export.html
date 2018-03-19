@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    import * as A from "js/submodule";
+
+    function print(x) {
+        console.log(x);
+    }
+
+    (function () {
+       let myShape = new A.Shape();
+       myShape.setPosition(10, 20);
+
+       print(myShape.getPosition());
+
+    }());
+</script>
+</body>
+</html>
